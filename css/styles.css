@@ -166,8 +166,8 @@ a {
 .contacts-footer:hover,
 .nav-link:focus,
 .contacts-header:focus,
-.contacts-footer:focus {
-  fill: var(--accent-color);
+.contacts-footer:focus,
+.current:visited {
   color: var(--accent-color);
 }
 
@@ -202,34 +202,24 @@ a {
   display: flex;
   align-items: center;
 
-  color: inherit;
+  color: var(--main-text-color);
   font-weight: 500;
   line-height: 1.14;
   letter-spacing: 0.02em;
 
-  transition: color var(--main-dilay) var(--main-cubic),
-    fill var(--main-dilay) var(--main-cubic);
-}
-
-.contacts-item {
-  /* display: flex;
-  align-items: center; */
-
-  color: var(--main-text-color);
-  fill: var(--main-text-color);
+  transition: color var(--main-dilay) var(--main-cubic);
 }
 
 .icon {
   margin-right: 10px;
-  width: 16px;
-  height: 12px;
 
-  fill: inherit;
+  fill: var(--main-text-color);
+  transition: fill var(--main-dilay) var(--main-cubic);
 }
 
-.smartphone-icon {
-  width: 10px;
-  height: 16px;
+.contacts-header:hover .icon,
+.contacts-header:focus .icon {
+  fill: var(--accent-color);
 }
 
 /* Оформление секции-герой */
@@ -283,6 +273,7 @@ a {
   letter-spacing: 0.06em;
 
   background-color: var(--accent-color);
+  transition: background-color var(--main-dilay) var(--main-cubic);
 }
 
 .primary:hover,
@@ -290,6 +281,61 @@ a {
   color: var(--accent-color);
 
   background-color: var(--second-accent-color);
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 1024px;
+
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: opacity var(--main-dilay) var(--main-cubic);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 528px;
+  height: 581px;
+
+  transform: translate(-50%, -50%) scale(1);
+  background-color: var(--second-accent-color);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: transform var(--main-dilay) var(--main-cubic);
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0.8);
+}
+
+.close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: inline-block;
+  padding: 9px 9px 10px 10px;
+  width: 30px;
+  height: 30px;
+
+  background-image: url("../images/close.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /* Оформление выравнивания секции особенности компании */
@@ -308,6 +354,7 @@ a {
   justify-content: center;
 }
 
+/* Оформление иконок особенностей компании */
 .advantages-item::before {
   display: block;
   content: "";
@@ -336,23 +383,6 @@ a {
 .advantages-item:nth-child(4)::before {
   background-image: url("../images/icon-astronaut.svg");
 }
-/* Оформление иконок особенностей компании */
-/* .icon-advantages-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 30px;
-  width: 270px;
-  height: 120px;
-
-  background-color: var(--button-secondary-bg-color);
-  border-radius: 4px;
-}
-
-.icon-advantages {
-  width: 65px;
-  height: 70px;
-} */
 
 /* Оформление заголовков секции особенности компании */
 .advantages-title {
@@ -636,6 +666,7 @@ a {
 
   background-color: var(--second-accent-color);
   border: 1px solid #eeeeee;
+  transition: box-shadow var(--main-dilay) var(--main-cubic);
 }
 
 .portfolio-card:hover,
@@ -644,16 +675,49 @@ a {
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
 
+.portfolio-card-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-description {
+  /* Позиционирование */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  /* Блочная модель */
+  display: block;
+  margin: 0;
+  padding: 63px 24px;
+  width: 370px;
+  height: 294px;
+
+  /* Типографика */
+  font-size: 18px;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+  color: var(--second-accent-color);
+  /* Отображение */
+  background-color: rgba(33, 150, 243, 0.9);
+  transition: top var(--main-dilay) var(--main-cubic);
+  /* Прочее */
+}
+
+.portfolio-card-container {
+  margin-bottom: 20px;
+}
+
+.portfolio-card-container:hover .portfolio-description,
+.portfolio-card-container:focus .portfolio-description {
+  top: 0;
+}
+
 .portfolio-list-item:not(:nth-child(3n)) {
   margin-right: 30px;
 }
 
 .portfolio-list-item:not(:nth-last-child(-n + 3)) {
   margin-bottom: 30px;
-}
-
-.portfolio-img {
-  margin-bottom: 20px;
 }
 
 .portfolio-title {
@@ -674,3 +738,13 @@ a {
   font-size: 16px;
   line-height: 1.87;
 }
+
+/* Позиционирование */
+
+/* Блочная модель */
+
+/* Типографика */
+
+/* Отображение */
+
+/* Прочее */

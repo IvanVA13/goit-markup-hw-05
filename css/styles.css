@@ -241,6 +241,7 @@ a {
 }
 
 .hero-container {
+  width: 100%;
   max-width: 696px;
   margin-left: auto;
   margin-right: auto;
@@ -289,7 +290,7 @@ a {
   left: 0;
 
   width: 100%;
-  height: 1024px;
+  height: 100%;
 
   background-color: rgba(0, 0, 0, 0.2);
   opacity: 1;
@@ -678,6 +679,8 @@ a {
 .portfolio-card-container {
   position: relative;
   overflow: hidden;
+
+  margin-bottom: 20px;
 }
 
 .portfolio-description {
@@ -703,12 +706,8 @@ a {
   /* Прочее */
 }
 
-.portfolio-card-container {
-  margin-bottom: 20px;
-}
-
-.portfolio-card-container:hover .portfolio-description,
-.portfolio-card-container:focus .portfolio-description {
+.portfolio-card:hover .portfolio-description,
+.portfolio-card:focus .portfolio-description {
   top: 0;
 }
 
